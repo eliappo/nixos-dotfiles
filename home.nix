@@ -6,11 +6,11 @@ let
   configs = {
     qtile = "qtile";
     nvim = "nvim";
-    alacritty = "alacritty";
-    rofi = "rofi";
+    # alacritty = "alacritty";
+    # rofi = "rofi";
     kanata = "kanata";
     hypr = "hypr";
-    waybar = "waybar";
+    # waybar = "waybar";
   };
   myscripts = import ./scripts.nix { inherit pkgs; };
 in
@@ -50,12 +50,6 @@ in
       "--border"
       "--inline-info"
     ];
-    # Optional: custom colors (catppuccin mocha style)
-    colors = {
-      "bg+" = "#313244";
-      "fg+" = "#cdd6f4";
-      "hl+" = "#f38ba8";
-    };
   };
 
   programs.tmux = {
@@ -70,7 +64,6 @@ in
     plugins = with pkgs.tmuxPlugins; [
       # Saves and restores tmux sessions
       resurrect
-
       # Automatic saving and restoring
       {
         plugin = continuum;
@@ -110,12 +103,25 @@ in
 
   home.stateVersion = "25.05";
 
+  # NOTE: Should be movedd intooo stylix!
   home.pointerCursor = {
     name = "Vanilla-DMZ";
     package = pkgs.vanilla-dmz;
     size = 24;
     gtk.enable = true;
   };
+
+  programs.rofi.enable = true;
+  programs.waybar.enable = true;
+  programs.alacritty = {
+    enable = true;
+    #    settings = {
+    #      font = {
+    #        size = 18;
+    #      };
+    #    };
+  };
+  # programs.alacritty.extraConfigFile = "${dotfiles}/alacritty/alacritty.toml"; #Probably a hallucination
 
   programs.bash = {
     enable = true;
@@ -156,7 +162,7 @@ in
     nixpkgs-fmt
     nodejs
     gcc
-    rofi
+    #    rofi
     kanata
     myscripts.pintos-symlink #Pintos related scripts for OSandC course.
     tree

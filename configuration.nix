@@ -33,7 +33,6 @@ in
   time.timeZone = "Europe/Amsterdam";
 
   services.displayManager.ly.enable = true;
-
   # Enable Hyprland
   programs.hyprland.enable = true;
 
@@ -66,10 +65,10 @@ in
 
   environment.systemPackages = with pkgs; [
     vim
-    alacritty
+    #    alacritty
     wget
     wl-clipboard # Changed from xclip for Wayland
-    waybar # Status bar for Hyprland
+    #    waybar # Status bar for Hyprland
     brave #A browser that claimss to protect you
     bear #Create compile-commands.json for clangd lsp
     cmake
@@ -83,6 +82,32 @@ in
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
+
+  # stylix color scheme. Find what you like anddd put here!
+  #search "Ricing linux has never been easier | NixOS + stylix" on youtube.
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    polarity = "dark";
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      sansSerif = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+      serif = config.stylix.fonts.sansSerif;
+    };
+    opacity = {
+      terminal = 0.9;
+      applications = 1.0;
+      desktop = 1.0;
+      popups = 0.95;
+    };
+    #Possibly cursor settings here also.
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";

@@ -1,0 +1,79 @@
+{
+    // === General Settings ===
+    "reload_style_on_change": true,
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+
+    // === Module Layout ===
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray", "clock"],
+
+    // === Left Side Modules ===
+    "hyprland/workspaces": {
+        "format": "{id}: {icon}",
+        "format-icons": {
+            "1": "",      // Browser
+            "2": "",      // Code
+            "3": "",      // Terminal
+            "4": "",      // Files
+            "5": "",      // Music
+            "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
+
+    "hyprland/submap": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+    // === Center Module ===
+    "hyprland/window": {
+        "format": "{}"  // Shows active window title
+    },
+
+    // === Right Side Modules ===
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"  // Click to open volume control
+    },
+
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname} ",
+        "format-disconnected": "Disconnected ⚠"
+    },
+
+    "cpu": {
+        "format": "{usage}% "
+    },
+
+    "memory": {
+        "format": "{}% "
+    },
+
+    "battery": {
+        "bat": "BAT0",  // Change if your battery is named differently
+        "states": {
+            "warning": 30,   // Yellow at 30%
+            "critical": 15   // Red at 15%
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "tray": {
+        "spacing": 10  // Space between tray icons
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",           // 24-hour format
+        "format-alt": "{:%Y-%m-%d}"     // Click to show date
+    }
+}

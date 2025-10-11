@@ -78,7 +78,6 @@ in
     clang #C compiler
     coreutils #Some core ulilities?
     bat #cool cat with sexy higlights
-    fzf #Fuzz you way to your destination!
   ];
 
   fonts.packages = with pkgs; [

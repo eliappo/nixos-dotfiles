@@ -27,6 +27,7 @@ in
       };
     };
   };
+
   programs.git = {
     enable = true;
     userName = "eliappo";
@@ -36,6 +37,77 @@ in
       pull.rebase = "false";
     };
   };
+
+
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true; # Adds Ctrl+T, Ctrl+R, Alt+C keybindings
+    # Optional: customize appearance
+    defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    defaultOptions = [
+      "--height 40%"
+      "--layout=reverse"
+      "--border"
+      "--inline-info"
+    ];
+    # Optional: custom colors (catppuccin mocha style)
+    colors = {
+      "bg+" = "#313244";
+      "fg+" = "#cdd6f4";
+      "hl+" = "#f38ba8";
+    };
+  };
+
+  programs.tmux = {
+    enable = true;
+    keyMode = "vi";
+    prefix = "C-b";
+
+    # Enable mouse support
+    mouse = true;
+
+    # Plugins for session persistence
+    plugins = with pkgs.tmuxPlugins; [
+      # Saves and restores tmux sessions
+      resurrect
+
+      # Automatic saving and restoring
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '15'  # Save every 15 minutes
+          set -g @continuum-boot 'on'  # Auto-start tmux on boot
+        '';
+      }
+      # Optional: Better status bar
+      {
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavour 'mocha'
+        '';
+      }
+    ];
+    extraConfig = ''
+      # Restore vim sessions too (if using vim)
+      set -g @resurrect-strategy-vim 'session'
+      set -g @resurrect-strategy-nvim 'session'
+      
+      # Capture pane contents
+      set -g @resurrect-capture-pane-contents 'on'
+      
+      # Start window numbering at 1
+      set -g base-index 1
+      set -g pane-base-index 1
+      
+      # Renumber windows when one is closed
+      set -g renumber-windows on
+
+      set -g escape-time 0
+      set -g focus-events on
+    '';
+  };
+
   home.stateVersion = "25.05";
 
   home.pointerCursor = {
@@ -87,7 +159,14 @@ in
     rofi
     kanata
     myscripts.pintos-symlink #Pintos related scripts for OSandC course.
+    tree
+    fd
+    font-awesome
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
   ];
+
+  fonts.fontconfig.enable = true;
 
 }
 

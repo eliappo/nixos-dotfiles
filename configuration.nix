@@ -43,11 +43,13 @@ in
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
+  virtualisation.docker.enable = true;
+
   users = {
     groups.uinput = { };
     users.elias = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "input" "uinput" ];
+      extraGroups = [ "wheel" "input" "uinput" "docker" ];
       packages = with pkgs; [
         tree
       ];

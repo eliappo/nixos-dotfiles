@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  secrets = ./secrets.nix;
+  secrets = import /home/elias/secrets.nix; #Place your secrets outside of the flake-directory because git.
 in
 {
   imports =
@@ -17,15 +17,15 @@ in
 
   networking.wireless.networks = {
     "Nr. 4 5GHz" = {
-      psk = secrets.wifi."Nr. 4 5GHz";
+      psk = secrets.wifiPasswords."Nr. 4 5GHz";
     };
     "ITU-Guest" = { };
     eduroam = {
       auth = ''
         key_mgmt=WPA-EAP
         eap=PWD
-        identity="${secrets.wifi.eduroam.identity}";
-        password="${secrets.wifi.eduroam.password}";
+        identity="${secrets.wifiPasswords.eduroam.identity}"
+        password="${secrets.wifiPasswords.eduroam.password}"
       '';
     };
   };

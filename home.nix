@@ -29,7 +29,7 @@ in
   programs.git = {
     enable = true;
     userName = "eliappo";
-    userEmail = "elias.illeris@pm.me";
+    userEmail = "237402327+eliappo@users.noreply.github.com";
     extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = "false";
@@ -49,7 +49,7 @@ in
     shellAliases = {
       btw = "echo I use nixos and I am a virgin now";
       nr = ''echo Rebuild and Switch that mother fucker! &&
-             sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos-virgin'';
+             sudo nixos-rebuild switch --impure --flake ~/nixos-dotfiles#nixos-virgin'';
     };
   };
 

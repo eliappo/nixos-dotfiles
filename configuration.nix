@@ -70,7 +70,15 @@ in
     wget
     wl-clipboard # Changed from xclip for Wayland
     waybar # Status bar for Hyprland
-    brave
+    brave #A browser that claimss to protect you
+    bear #Create compile-commands.json for clangd lsp
+    cmake
+    gnumake
+    gcc #good ol' C compiler for serious programs
+    clang #C compiler
+    coreutils #Some core ulilities?
+    bat #cool cat with sexy higlights
+    fzf #Fuzz you way to your destination!
   ];
 
   fonts.packages = with pkgs; [

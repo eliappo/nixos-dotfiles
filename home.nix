@@ -12,6 +12,7 @@ let
     hypr = "hypr";
     waybar = "waybar";
   };
+  myscripts = import ./scripts.nix { inherit pkgs; };
 in
 {
   home.username = "elias";
@@ -50,6 +51,7 @@ in
       btw = "echo I use nixos and I am a virgin now";
       nr = ''echo Rebuild and Switch that mother fucker! &&
              sudo nixos-rebuild switch --impure --flake ~/nixos-dotfiles#nixos-virgin'';
+      run_pintos = "docker run -it --rm --name pintos --mount type=bind,source=/home/elias/itu/operating_systems_and_C/,target=/home/PKUOS/pintos pkuflyingpig/pintos bash";
     };
   };
 
@@ -84,6 +86,7 @@ in
     gcc
     rofi
     kanata
+    myscripts.pintos-symlink #Pintos related scripts for OSandC course.
   ];
 
 }

@@ -19,6 +19,9 @@ in
     "Nr. 4 5GHz" = {
       psk = secrets.wifiPasswords."Nr. 4 5GHz";
     };
+    "bolig37" = {
+      psk = secrets.wifiPasswords."bolig37";
+    };
     "ITU-Guest" = { };
     eduroam = {
       auth = ''
@@ -44,11 +47,23 @@ in
 
   virtualisation.docker.enable = true;
 
+  # Brightness control
+  programs.light.enable = true;
+
+  # Sound with PipeWire
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   users = {
     groups.uinput = { };
     users.elias = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "input" "uinput" "docker" ];
+      extraGroups = [ "wheel" "input" "uinput" "docker" "video" ];
       packages = with pkgs; [
         tree
       ];
@@ -77,6 +92,8 @@ in
     clang #C compiler
     coreutils #Some core ulilities?
     bat #cool cat with sexy higlights
+    brightnessctl
+    pamixer
   ];
 
   fonts.packages = with pkgs; [
@@ -90,6 +107,12 @@ in
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     polarity = "dark";
     fonts = {
+      sizes = {
+        terminal = 18;
+        applications = 14;
+        desktop = 16;
+        popups = 18;
+      };
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font Mono";
@@ -105,6 +128,11 @@ in
       applications = 1.0;
       desktop = 1.0;
       popups = 0.95;
+    };
+    cursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+      size = 24;
     };
     #Possibly cursor settings here also.
   };

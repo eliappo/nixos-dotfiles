@@ -7,7 +7,7 @@ let
     qtile = "qtile";
     nvim = "nvim";
     # alacritty = "alacritty";
-    # rofi = "rofi";
+    rofi = "rofi";
     kanata = "kanata";
     hypr = "hypr";
     # waybar = "waybar";
@@ -38,7 +38,6 @@ in
     };
   };
 
-
   programs.fzf = {
     enable = true;
     enableBashIntegration = true; # Adds Ctrl+T, Ctrl+R, Alt+C keybindings
@@ -56,10 +55,8 @@ in
     enable = true;
     keyMode = "vi";
     prefix = "C-b";
-
     # Enable mouse support
     mouse = true;
-
     # Plugins for session persistence
     plugins = with pkgs.tmuxPlugins; [
       # Saves and restores tmux sessions
@@ -103,25 +100,14 @@ in
 
   home.stateVersion = "25.05";
 
-  # NOTE: Should be movedd intooo stylix!
-  home.pointerCursor = {
-    name = "Vanilla-DMZ";
-    package = pkgs.vanilla-dmz;
-    size = 24;
-    gtk.enable = true;
-  };
+  stylix.targets.rofi.enable = false;
 
-  programs.rofi.enable = true;
   programs.waybar.enable = true;
+  programs.zoxide.enable = true;
+
   programs.alacritty = {
     enable = true;
-    #    settings = {
-    #      font = {
-    #        size = 18;
-    #      };
-    #    };
   };
-  # programs.alacritty.extraConfigFile = "${dotfiles}/alacritty/alacritty.toml"; #Probably a hallucination
 
   programs.bash = {
     enable = true;
@@ -156,17 +142,22 @@ in
   };
 
   home.packages = with pkgs; [
+    ## Shell tools
     neovim
     ripgrep
-    nil
-    nixpkgs-fmt
-    nodejs
-    gcc
-    #    rofi
-    kanata
-    myscripts.pintos-symlink #Pintos related scripts for OSandC course.
     tree
     fd
+    myscripts.pintos-symlink #Pintos related scripts for OSandC course.
+
+    ##Programs
+    nil
+    nodejs #????
+    gcc #GNU C compiler
+
+    ## System appearance
+    nixpkgs-fmt
+    rofi
+    kanata
     font-awesome
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code

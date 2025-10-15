@@ -1,5 +1,6 @@
 (defcfg
   process-unmapped-keys yes
+  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
 )
 
 ;; ISO keyboard layout with 102nd key (IntlBackslash)

@@ -41,15 +41,9 @@ in
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true; # Power on Bluetooth adapter on boot
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-        Experimental = true; # Enable experimental features like battery levels
-      };
-    };
   };
 
-  services.blueman.enable = true; # Blueman GUI for easy pairing
+  # services.blueman.enable = true; # Blueman GUI for easy pairing
   services.displayManager.ly.enable = true;
   # Enable Hyprland
   programs.hyprland.enable = true;
@@ -92,6 +86,13 @@ in
   '';
 
   programs.firefox.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-volman
+      thunar-archive-plugin
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     vim

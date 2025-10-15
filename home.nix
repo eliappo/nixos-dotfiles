@@ -102,7 +102,22 @@ in
 
   stylix.targets.rofi.enable = false;
 
-  programs.waybar.enable = true;
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainbar = {
+        modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" "tray" "clock" ];
+        bluetooth = {
+          format = " {status}";
+          format-connected = " {device_alias}";
+          format-connected-battery = " {device_alias} {device_battery_percentage}%";
+          tooltip-format = "{controller_alias}\t{controller_address}";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+          on-click = "blueman-manager";
+        };
+      };
+    };
+  };
   programs.zoxide.enable = true;
 
   programs.alacritty = {
@@ -141,6 +156,14 @@ in
     };
   };
 
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
+
   home.packages = with pkgs; [
     ## Shell tools
     neovim
@@ -161,6 +184,7 @@ in
     font-awesome
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
+    papirus-icon-theme
   ];
 
   fonts.fontconfig.enable = true;

@@ -151,7 +151,20 @@ vim.lsp.config['nil_ls'] = {
     }
 }
 
+-- C/C++ LSP (clangd)
+vim.lsp.config['clangd'] = {
+    cmd = { 'clangd', '--background-index', '--clang-tidy' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+    root_markers = { 
+        'compile_commands.json', 
+        'compile_flags.txt', 
+        '.clangd',
+        '.git' 
+    },
+    capabilities = caps,
+}
 
+vim.lsp.enable('clangd')
 vim.lsp.enable('luals')
 vim.lsp.enable('cssls')
 vim.lsp.enable('ts_ls')

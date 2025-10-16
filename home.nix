@@ -176,8 +176,10 @@ in
     nil
     nodejs #????
     gcc #GNU C compiler
+    clang-tools
 
     ## System appearance
+    hyprpaper
     nixpkgs-fmt
     rofi
     kanata

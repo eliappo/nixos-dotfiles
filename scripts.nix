@@ -17,7 +17,6 @@
       BASE_DIR="$HOME/itu/operating_systems_and_C"
       PKU_DIR="$BASE_DIR/pintos/src"
       OSLAB_DIR="$BASE_DIR/oslab25"
-
       PKU_FILE="$PKU_DIR/$RELATIVE_PATH"
       OSLAB_FILE="$OSLAB_DIR/$RELATIVE_PATH"
 
@@ -40,9 +39,13 @@
       echo "Removing: $PKU_FILE"
       rm "$PKU_FILE"
 
-      # Create symlink
-      echo "Creating symlink: $PKU_FILE -> $OSLAB_FILE"
-      ln -s "$OSLAB_FILE" "$PKU_FILE"
+      # Calculate relative path from PKU file's directory to OSLAB file
+      PKU_DIR_PATH=$(dirname "$PKU_FILE")
+      RELATIVE_LINK=$(realpath --relative-to="$PKU_DIR_PATH" "$OSLAB_FILE")
+
+      # Create relative symlink
+      echo "Creating relative symlink: $PKU_FILE -> $RELATIVE_LINK"
+      ln -s "$RELATIVE_LINK" "$PKU_FILE"
 
       echo "✓ Done! $RELATIVE_PATH is now symlinked from oslab25"
       ls -la "$PKU_FILE"

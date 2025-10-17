@@ -25,6 +25,7 @@ set.cursorline = true
 
 -- 80th column
 set.colorcolumn = "80"
+vim.cmd('hi ColorColumn guibg=#15151')
 
 -- clipboard
 set.clipboard:append("unnamedplus")

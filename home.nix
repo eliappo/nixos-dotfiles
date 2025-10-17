@@ -118,7 +118,11 @@ in
       };
     };
   };
-  programs.zoxide.enable = true;
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    options = [ "--cmd cd" ];
+  };
 
   programs.alacritty = {
     enable = true;
@@ -171,15 +175,19 @@ in
     tree
     fd
     myscripts.pintos-symlink #Pintos related scripts for OSandC course.
+    myscripts.screen-shot-drag #Dragged screen shot to clipboard.
 
     ##Programs
     nil
     nodejs #????
     gcc #GNU C compiler
     clang-tools
+    slurp
+    grim
 
     ## System appearance
     hyprpaper
+    hyprpicker
     nixpkgs-fmt
     rofi
     kanata

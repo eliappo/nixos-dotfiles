@@ -120,7 +120,8 @@ in
   #search "Ricing linux has never been easier | NixOS + stylix" on youtube.
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    image = /home/elias/Wallpapers/uwp4293631.png;
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     polarity = "dark";
     fonts = {
       sizes = {
@@ -140,7 +141,7 @@ in
       serif = config.stylix.fonts.sansSerif;
     };
     opacity = {
-      terminal = 0.9;
+      terminal = 0.85;
       applications = 1.0;
       desktop = 1.0;
       popups = 0.95;

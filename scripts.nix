@@ -1,6 +1,11 @@
 { pkgs }:
 
 {
+  screen-shot-drag = pkgs.writeShellApplication {
+    name = "screen-shot-drag";
+    runtimeInputs = with pkgs; [ coreutils ];
+    text = ''grim -l 0 -g "$(slurp)" - | wl-copy'';
+  };
   pintos-symlink = pkgs.writeShellApplication {
     name = "pintos-symlink";
     runtimeInputs = with pkgs; [ coreutils ];

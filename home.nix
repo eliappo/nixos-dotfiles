@@ -201,6 +201,8 @@ in
     };
   };
 
+  programs.obsidian.enable = true;
+
   gtk = {
     enable = true;
     iconTheme = {

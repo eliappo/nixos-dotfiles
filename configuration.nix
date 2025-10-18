@@ -132,11 +132,11 @@ in
       };
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
+        name = "JetBrainsMono Nerd Font Propo";
       };
       sansSerif = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
+        name = "JetBrainsMono Nerd Font Propo";
       };
       serif = config.stylix.fonts.sansSerif;
     };

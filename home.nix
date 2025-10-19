@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
@@ -6,13 +6,37 @@ let
   configs = {
     qtile = "qtile";
     nvim = "nvim";
-    # alacritty = "alacritty";
     rofi = "rofi";
     kanata = "kanata";
     hypr = "hypr";
-    # waybar = "waybar";
   };
   myscripts = import ./scripts.nix { inherit pkgs; };
+  #Waybar related
+  # Helper to convert 2-digit hex string to decimal
+  #hexToDec = hex:
+  #  let
+  #    chars = lib.stringToCharacters hex;
+  #    hexDigit = c:
+  #      if c == "0" then 0 else if c == "1" then 1
+  #      else if c == "2" then 2 else if c == "3" then 3
+  #      else if c == "4" then 4 else if c == "5" then 5
+  #      else if c == "6" then 6 else if c == "7" then 7
+  #      else if c == "8" then 8 else if c == "9" then 9
+  #      else if c == "a" || c == "A" then 10
+  #      else if c == "b" || c == "B" then 11
+  #      else if c == "c" || c == "C" then 12
+  #      else if c == "d" || c == "D" then 13
+  #      else if c == "e" || c == "E" then 14
+  #      else if c == "f" || c == "F" then 15
+  #      else 0;
+  #  in
+  #  (hexDigit (builtins.elemAt chars 0)) * 16 +
+  #  (hexDigit (builtins.elemAt chars 1));
+
+  #baseColor = config.lib.stylix.colors.base00;
+  #r = hexToDec (builtins.substring 0 2 baseColor);
+  #g = hexToDec (builtins.substring 2 2 baseColor);
+  #b = hexToDec (builtins.substring 4 2 baseColor);
 in
 {
   home.username = "elias";
@@ -146,17 +170,218 @@ in
     enable = true;
     settings = {
       mainbar = {
-        modules-right = [ "pulseaudio" "network" "bluetooth" "cpu" "memory" "battery" "tray" "clock" ];
+        reload_style_on_change = true;
+        layer = "top";
+        position = "top";
+        height = 30;
+        modules-left = [
+          "hyprland/workspaces"
+          "custom/sep"
+          "hyprland/window"
+        ];
+        modules-center = [ ];
+        modules-right = [
+          "custom/sep"
+          "pulseaudio"
+          "custom/sep"
+          "bluetooth"
+          "custom/sep"
+          "network"
+          "custom/sep"
+          "cpu"
+          "custom/sep"
+          "memory"
+          "custom/sep"
+          "disk"
+          "custom/sep"
+          "battery"
+          "custom/sep"
+          "clock"
+          "custom/sep"
+          "tray"
+        ];
+        "hyprland/workspaces" = {
+          disable-scroll = true;
+          all-outputs = true;
+          warp-on-scroll = false;
+          format = "{name}";
+          persistent-workspaces."*" = [ 1 2 3 4 5 6 7 8 9 ];
+        };
+        "hyprland/window" = {
+          max-length = 40;
+          separate-outputs = false;
+        };
+        pulseaudio = {
+          format = " {volume}% ";
+          format-muted = " Muted";
+          on-click = "pavucontrol"; #FIX: Need to be added
+        };
+        network = {
+          format-wifi = " {essid} ({signalStrength}%)";
+          format-ethernet = " {ifname}";
+          format-disconnected = " Disconnected ⚠";
+          tooltip-format = "{ipaddr}";
+        };
+        cpu = {
+          format = "CPU: {usage}%";
+          tooltip = false;
+        };
+        memory = {
+          format = "Mem: {used}GiB";
+          tooltip-format = "{used:0.1f}G / {total:0.1f}G used";
+        };
+        battery = {
+          states = {
+            good = 95;
+            warning = 30;
+            critical = 15;
+          };
+          format = "Bat: {capacity}% {icon} {time}";
+          format-charging = " {capacity}% ";
+          format-plugged = " {capacity}% ";
+          format-icons = [ "" "" "" "" "" ];
+        };
+        tray.spacing = 10;
+        clock = {
+          format = " {:%H:%M}";
+          format-alt = " {:%Y-%m-%d}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+        disk = {
+          interval = 60;
+          path = "/";
+          format = "Disk {free}";
+        };
+        "custom/sep" = {
+          format = "|";
+          interval = 0;
+        };
         bluetooth = {
           format = " {status}";
           format-connected = " {device_alias}";
           format-connected-battery = " {device_alias} {device_battery_percentage}%";
           tooltip-format = "{controller_alias}\t{controller_address}";
           tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-          on-click = "blueman-manager";
+          on-click = "blueman-manager"; #Not present
         };
       };
     };
+    style = lib.mkAfter ''
+      @define-color bg    #1a1b26; 
+      @define-color fg    #a9b1d6; 
+      @define-color blk   #32344a; 
+      @define-color red   #f7768e; 
+      @define-color grn   #9ece6a; 
+      @define-color ylw   #e0af68; 
+      @define-color blu   #7aa2f7; 
+      @define-color mag   #ad8ee6; 
+      @define-color cyn   #0db9d7; 
+      @define-color brblk #444b6a; 
+      @define-color white #ffffff; 
+      @define-color bg-trans rgba(26,27,38,0.9);
+
+      * {
+          font-family: "JetBrainsMono Nerd Font", monospace;
+          font-size: 16px;
+          font-weight: bold;
+      }
+
+      window#waybar {
+          background-color: @bg-trans;
+          color: @fg;
+      }
+
+      #workspaces button {
+          padding: 0 6px;
+          color: @cyn;
+          background: transparent;
+          border-bottom: 3px solid @bg;
+      }
+      #workspaces button.active {
+          color: @cyn;
+          border-bottom: 3px solid @mag;
+      }
+      #workspaces button.empty {
+          color: @white;
+      }
+      #workspaces button.empty.active {
+          color: @cyn;
+          border-bottom: 3px solid @mag;
+      }
+
+      #workspaces button.urgent {
+          background-color: @red;
+      }
+
+      button:hover {
+          background: inherit;
+          box-shadow: inset 0 -3px #ffffff;
+      }
+
+      #clock,
+      #custom-sep,
+      #battery,
+      #cpu,
+      #memory,
+      #disk,
+      #network,
+      #bluetooth,
+      #pulseaudio,
+      #tray {
+          padding: 0 8px;
+          color: @white;
+      }
+
+      #custom-sep {
+          color: @brblk;
+      }
+
+      #clock {
+          color: @cyn;
+          border-bottom: 4px solid @cyn;
+      }
+
+      #battery {
+          color: @mag;
+          border-bottom: 4px solid @mag;
+      }
+
+      #disk {
+          color: @ylw;
+          border-bottom: 4px solid @ylw;
+      }
+
+      #memory {
+          color: @mag;
+          border-bottom: 4px solid @mag;
+      }
+
+      #cpu {
+          color: @grn;
+          border-bottom: 4px solid @grn;
+      }
+
+      #network {
+          color: @blu;
+          border-bottom: 4px solid @blu;
+      }
+
+      #network.disconnected {
+          background-color: @red;
+      }
+      #bluetooth {
+          color: @cyn;
+          border-bottom: 4px solid @cyn;
+      }
+      #pulseaudio {
+          color: @mag;
+          border-bottom: 4px solid @mag;
+      }
+
+      #tray {
+          background-color: #2980b9;
+      }
+    '';
   };
 
   programs.zoxide = {
@@ -201,8 +426,6 @@ in
     };
   };
 
-  programs.obsidian.enable = true;
-
   gtk = {
     enable = true;
     iconTheme = {
@@ -227,6 +450,9 @@ in
     clang-tools
     slurp #Get dragged screen dimension
     grim #Screenshot - can take dimension form slurp
+    obsidian #Note Tool
+    pastel
+    astroterm
 
     ## System appearance
     hyprpaper

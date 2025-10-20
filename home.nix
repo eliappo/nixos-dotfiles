@@ -426,6 +426,9 @@ in
     };
   };
 
+  programs.obs-studio.enable = true;
+  programs.mpv.enable = true;
+
   gtk = {
     enable = true;
     iconTheme = {

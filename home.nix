@@ -426,7 +426,6 @@ in
     };
   };
 
-  programs.obs-studio.enable = true;
   programs.mpv.enable = true;
 
   gtk = {
@@ -456,6 +455,9 @@ in
     obsidian #Note Tool
     pastel
     astroterm
+    (obs-studio.override {
+      cudaSupport = true;
+    })
 
     ## System appearance
     hyprpaper

@@ -49,6 +49,8 @@ in
   # Enable Hyprland
   programs.hyprland.enable = true;
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
   # XDG portal for screen sharing, file pickers, etc.
   xdg.portal = {
     enable = true;

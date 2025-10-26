@@ -32,6 +32,7 @@ in
         password="${secrets.wifiPasswords.eduroam.password}"
       '';
     };
+    "Pixel_8135".psk = secrets.wifiPasswords."Pixel_8135";
   };
 
   time.timeZone = "Europe/Amsterdam";
@@ -51,6 +52,7 @@ in
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
+  hardware.nvidia.powerManagement.enable = true;
   # XDG portal for screen sharing, file pickers, etc.
   xdg.portal = {
     enable = true;

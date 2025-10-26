@@ -62,6 +62,12 @@ in
     };
   };
 
+  programs.eza = {
+    enable = true;
+    git = true;
+    colors = "auto";
+  };
+
   programs.fzf = {
     enable = true;
     enableBashIntegration = true; # Adds Ctrl+T, Ctrl+R, Alt+C keybindings
@@ -217,17 +223,17 @@ in
           on-click = "pavucontrol"; #FIX: Need to be added
         };
         network = {
-          format-wifi = " {essid} ({signalStrength}%)";
+          format-wifi = " {essid}   ({signalStrength}%)";
           format-ethernet = " {ifname}";
           format-disconnected = " Disconnected ⚠";
           tooltip-format = "{ipaddr}";
         };
         cpu = {
-          format = "CPU: {usage}%";
+          format = "CPU: 󰻠 {usage}%";
           tooltip = false;
         };
         memory = {
-          format = "Mem: {used}GiB";
+          format = "Mem: 󰍛 {used}GiB";
           tooltip-format = "{used:0.1f}G / {total:0.1f}G used";
         };
         battery = {
@@ -236,7 +242,7 @@ in
             warning = 30;
             critical = 15;
           };
-          format = "Bat: {capacity}% {icon} {time}";
+          format = "Bat: {capacity}% {icon}  {time}";
           format-charging = " {capacity}% ";
           format-plugged = " {capacity}% ";
           format-icons = [ "" "" "" "" "" ];
@@ -257,9 +263,9 @@ in
           interval = 0;
         };
         bluetooth = {
-          format = " {status}";
-          format-connected = " {device_alias}";
-          format-connected-battery = " {device_alias} {device_battery_percentage}%";
+          format = "{status} ";
+          format-connected = "{device_alias} 󰂱";
+          format-connected-battery = " {device_alias} 󰂱 {device_battery_percentage}%";
           tooltip-format = "{controller_alias}\t{controller_address}";
           tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
           on-click = "blueman-manager"; #Not present
@@ -401,6 +407,7 @@ in
       nr = ''echo Rebuild and Switch that mother fucker! &&
              sudo nixos-rebuild switch --impure --flake ~/nixos-dotfiles#nixos-virgin'';
       run_pintos = "docker run -it --rm --name pintos --mount type=bind,source=/home/elias/itu/operating_systems_and_C/,target=/home/PKUOS/pintos pkuflyingpig/pintos bash";
+      pintos_docker_attach = "docker exec -it pintos bash";
     };
   };
 
@@ -427,6 +434,7 @@ in
   };
 
   programs.mpv.enable = true;
+  programs.zathura.enable = true;
 
   gtk = {
     enable = true;
@@ -459,6 +467,11 @@ in
       cudaSupport = true;
     })
 
+    ## Utils
+    unzip
+    btop
+
+
     ## System appearance
     hyprpaper
     hyprpicker
@@ -469,6 +482,15 @@ in
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
     papirus-icon-theme
+
+    # Java Development Kit
+    jdk21
+    # Language Server Protocol
+    jdt-language-server
+    # Build tools
+    gradle
+    # Additional useful tools
+    jq
   ];
 
   fonts.fontconfig.enable = true;

@@ -418,14 +418,29 @@ in
     })
     configs;
 
-  systemd.user.services.kanata = {
+  systemd.user.services.kanata-builtin = {
     Unit = {
-      Description = "Kanata keyboard layout";
+      Description = "Kanata keyboard layout for builtin and regular keyboards";
       Documentation = "https://github.com/jtroo/kanata";
     };
     Service = {
       Type = "simple";
-      ExecStart = "${pkgs.kanata}/bin/kanata --cfg ${dotfiles}/kanata/kanata.kbd.lisp";
+      ExecStart = "${pkgs.kanata}/bin/kanata --cfg ${dotfiles}/kanata/kanata-builtin.kbd.lisp";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
+  systemd.user.services.kanata-kinesis = {
+    Unit = {
+      Description = "Kanata keyboard layout for the kinesis keyboard";
+      Documentation = "https://github.com/jtroo/kanata";
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.kanata}/bin/kanata --cfg ${dotfiles}/kanata/kanata-kinesis.kbd.lisp";
       Restart = "on-failure";
     };
     Install = {

@@ -38,6 +38,15 @@ in
   time.timeZone = "Europe/Amsterdam";
 
 
+  # Steam
+  programs.steam = {
+    enable = true;
+    # remotePlay.openFirewall = true; # Optional: for Steam Remote Play
+    # dedicatedServer.openFirewall = true; # Optional: for Source Dedicated Server
+  };
+
+  # If you need 32-bit graphics support (usually needed for games)
+  hardware.graphics.enable32Bit = true;
 
   # Bluetooth
   hardware.bluetooth = {

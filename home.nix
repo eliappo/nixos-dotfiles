@@ -50,7 +50,13 @@ in
         identityFile = "~/.ssh/id_ed25519";
       };
     };
+    extraConfig = ''
+      AddKeysToAgent yes
+    '';
   };
+  services.ssh-agent.enable = true;
+
+  programs.vscode.enable = true;
 
   programs.git = {
     enable = true;

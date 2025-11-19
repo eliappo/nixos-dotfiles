@@ -39,8 +39,12 @@ let
   #b = hexToDec (builtins.substring 4 2 baseColor);
 in
 {
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
+  };
   home.username = "elias";
   home.homeDirectory = "/home/elias";
+
   programs.ssh = {
     enable = true;
     matchBlocks = {
@@ -49,10 +53,12 @@ in
         user = "git";
         identityFile = "~/.ssh/id_ed25519";
       };
+      "cos.itu.dk" = {
+        hostname = "cos.itu.dk";
+        user = "elpo";
+        identityFile = "~/.ssh/id_ed25519";
+      };
     };
-    extraConfig = ''
-      AddKeysToAgent yes
-    '';
   };
   services.ssh-agent.enable = true;
 
@@ -175,6 +181,7 @@ in
   };
 
   home.stateVersion = "25.05";
+
 
   stylix.targets.rofi.enable = false;
 
@@ -415,6 +422,11 @@ in
       run_pintos = "docker run -it --rm --name pintos --mount type=bind,source=/home/elias/itu/operating_systems_and_C/,target=/home/PKUOS/pintos pkuflyingpig/pintos bash";
       pintos_docker_attach = "docker exec -it pintos bash";
     };
+    initExtra = ''
+      if [ -z "$SSH_AUTH_SOCK" ]; then
+        export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+      fi
+    '';
   };
 
   xdg.configFile = builtins.mapAttrs
@@ -508,6 +520,8 @@ in
     jdk21
     # Language Server Protocol
     jdt-language-server
+    # Java debug adapter
+    vscode-extensions.vscjava.vscode-java-debug
     # Build tools
     gradle
     # Additional useful tools

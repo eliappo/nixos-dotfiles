@@ -2,7 +2,7 @@
   process-unmapped-keys yes
   linux-dev(
             /dev/input/by-path/platform-i8042-serio-0-event-kbd
-            /dev/input/by-path/pci-0000:00:14.0-usb-0:1:1.0-event-kbd
+            /dev/input/by-id/usb-CX_2.4G_Wireless_Receiver-event-kbd
             )
 )
 
@@ -23,20 +23,28 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    
   esc  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    \    ret
   lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc           @syml rmet rctl
+  lctl lmet lalt           @syml2          @syml rmet rctl
 )
 
 (deflayer symbols
-  _    RA-8 S-8  S-9  RA-9 _      _    _    _    _    _    _    _    _
-  S-1  ,    RA-7 RA-0 S-,  S--    _    _    _    S--  '    _    _    
-  S-6  S-]  S-0  S-/  RA-4 S-3    _    _    _    _    `    _    \    _
-  _    RA-] 102d RA-= /    S-102d S-7  RA-9 _    102d ;    _    _
-  _    _    _              spc              bspc ret  _
+   _    RA-8 S-8  S-9  RA-9 _      _    _    _    _    _    _    _    _
+   S-1  ,    RA-7 RA-0 S-,  S--    _    _    _    S--  '    _    _    
+   S-6  S-]  S-0  S-/  RA-4 S-\    _    _    _    _    `    _    \    _
+RA-102d RA-] 102d RA-= /    S-102d S-7  RA-9 _    102d ;    _    _
+   _    _    _              spc              bspc ret  _
+)
+
+(deflayer symbols2
+   _    RA-8 S-8  S-9  RA-9 _      _     _    _    _    _    _    _    _
+   S-1  ,    RA-7 RA-0 S-,  S--    _     _    _    S--  '    _    _    
+   S-6  S-]  S-0  S-/  RA-4 S-\    _     _    _    _    `    _    \    _
+   RA-2 S-6  \    S-2  -    RA-102d S-7  RA-9 _    102d ;    _    _
+   _    _    _              spc              bspc ret  _
 )
 
 (defalias
-  ;; Space with layer toggle
   syml (tap-hold 200 200 ralt (layer-toggle symbols))
+  syml2 (tap-hold 200 200 spc (layer-toggle symbols2))
   
   ;; Left hand home row mods (GACS order)
   a (tap-hold 200 200 a lmet)  ;; A - GUI/Win/Super

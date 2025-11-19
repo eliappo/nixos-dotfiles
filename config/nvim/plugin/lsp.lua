@@ -42,6 +42,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local buf    = args.buf
         local map    = function(mode, lhs, rhs) vim.keymap.set(mode, lhs, rhs, { buffer = buf }) end
 
+        -- Disable formatting capability for clangd
+        if client.name == 'clangd' then
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+        end
+
         -- Keymaps (use builtin LSP buffer functions)
         map('n', 'K', vim.lsp.buf.hover)
         map('n', 'gd', vim.lsp.buf.definition)
@@ -56,7 +62,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('n', '<F4>', vim.lsp.buf.code_action)
 
         -- Put near your LSP on_attach
-        local excluded_filetypes = { php = true }
+        local excluded_filetypes = { php = true , c == true, cpp == true, h == true, hpp = true }
 
         -- Auto-format on save (only if server can't do WillSaveWaitUntil)
         if not client:supports_method('textDocument/willSaveWaitUntil')

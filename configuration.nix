@@ -110,6 +110,7 @@ in
 
   environment.systemPackages = with pkgs; [
     vim
+    man-pages
     #    alacritty
     wget
     wl-clipboard # Changed from xclip for Wayland
@@ -129,6 +130,9 @@ in
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
+
+  # Man database
+  documentation.man.generateCaches = true;
 
   # stylix color scheme. Find what you like anddd put here!
   #search "Ricing linux has never been easier | NixOS + stylix" on youtube.

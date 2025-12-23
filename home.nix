@@ -500,6 +500,9 @@ in
       cudaSupport = true;
     })
 
+    ##Development
+    rustup
+
     ## Utils
     unzip
     btop

@@ -501,7 +501,10 @@ in
     })
 
     ##Development
+    ##Rust
     rustup
+    cargo-espflash
+    espflash
 
     ## Utils
     unzip

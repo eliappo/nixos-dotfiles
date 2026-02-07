@@ -20,6 +20,10 @@ in
     "Nr. 4 5GHz" = {
       psk = secrets.wifiPasswords."Nr. 4 5GHz";
     };
+    "Rosstova" = {
+      #Summerhouse in Norway
+      psk = "Topptur2023";
+    };
     "bolig37" = {
       psk = secrets.wifiPasswords."bolig37";
     };
@@ -37,6 +41,7 @@ in
 
   time.timeZone = "Europe/Amsterdam";
 
+  programs.nix-ld.enable = true;
 
   # Steam
   programs.steam = {
@@ -86,7 +91,7 @@ in
     groups.uinput = { };
     users.elias = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "input" "uinput" "docker" "video" ];
+      extraGroups = [ "wheel" "input" "uinput" "docker" "video" "dialout" ];
       packages = with pkgs; [
         tree
       ];
@@ -125,6 +130,11 @@ in
     bat #cool cat with sexy higlights
     brightnessctl
     pamixer
+
+    #For running windows apps
+    bottles
+    wine
+    winetricks
   ];
 
   fonts.packages = with pkgs; [

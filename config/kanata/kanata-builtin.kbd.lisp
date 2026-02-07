@@ -3,6 +3,7 @@
   linux-dev(
             /dev/input/by-path/platform-i8042-serio-0-event-kbd
             /dev/input/by-id/usb-CX_2.4G_Wireless_Receiver-event-kbd
+            /dev/input/by-id/usb-Compx_Flow84-L@Lofree-event-kbd
             )
 )
 

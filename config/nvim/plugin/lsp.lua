@@ -170,9 +170,36 @@ vim.lsp.config['clangd'] = {
     capabilities = caps,
 }
 
+-- Rust LSP (rust-analyzer)
+vim.lsp.config['rust_analyzer'] = {
+    cmd = { 'rust-analyzer' },
+    filetypes = { 'rust', 'rs' },
+    root_markers = { 'Cargo.toml', 'rust-project.json', '.git' },
+--    capabilities = caps,
+--    settings = {
+--        ['rust-analyzer'] = {
+--            cargo = {
+--                allFeatures = true,
+--                loadOutDirsFromCheck = true,
+--                buildScripts = {
+--                    enable = true,
+--                },
+--            },
+--            check = {
+--                allFeatures = true,
+--                command = 'clippy',
+--            },
+--            procMacro = {
+--                enable = true,
+--            },
+--        },
+--    },
+}
+
 vim.lsp.enable('clangd')
 vim.lsp.enable('luals')
 vim.lsp.enable('cssls')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('phpls')
 vim.lsp.enable('nil_ls')
+vim.lsp.enable('rust_analyzer')

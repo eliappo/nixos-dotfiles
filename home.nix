@@ -62,6 +62,11 @@ in
   };
   services.ssh-agent.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.vscode.enable = true;
 
   programs.git = {
@@ -445,6 +450,9 @@ in
       Type = "simple";
       ExecStart = "${pkgs.kanata}/bin/kanata --cfg ${dotfiles}/kanata/kanata-builtin.kbd.lisp";
       Restart = "on-failure";
+      RestartSec = "5s";
+      StartLimitBurst = 3;
+      StartLimitIntervalSec = "60s";
     };
     Install = {
       WantedBy = [ "default.target" ];
@@ -455,11 +463,15 @@ in
     Unit = {
       Description = "Kanata keyboard layout for the kinesis keyboard";
       Documentation = "https://github.com/jtroo/kanata";
+      ConditionPathExists = "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd";
     };
     Service = {
       Type = "simple";
       ExecStart = "${pkgs.kanata}/bin/kanata --cfg ${dotfiles}/kanata/kanata-kinesis.kbd.lisp";
       Restart = "on-failure";
+      RestartSec = "5s";
+      StartLimitBurst = 3;
+      StartLimitIntervalSec = "60s";
     };
     Install = {
       WantedBy = [ "default.target" ];
@@ -500,11 +512,36 @@ in
       cudaSupport = true;
     })
 
-    ##Development
+    #### Development ####
     ##Rust
     rustup
+
+    ## docker
+    docker-compose
+
+    ## Go-lang
+    go_1_25
+    gopls #go lsp
+    gotools # Extra go tooling
+    go-outline # code outline 
+    delve # debugger
+
+    ##Python
+    (python312.withPackages (ps: with ps; [
+      numpy
+      requests
+      pandas
+      flask
+      pip
+      virtualenv
+      werkzeug
+    ]))
+
+    ##Esp32 development
     cargo-espflash
     espflash
+    esp-generate
+    espup
 
     ## Utils
     unzip
@@ -532,6 +569,21 @@ in
     gradle
     # Additional useful tools
     jq
+
+    freecad
+    (pkgs.prusa-slicer.overrideAttrs (old: {
+      nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ pkgs.makeWrapper ];
+      postInstall = (old.postInstall or "") + ''
+        wrapProgram $out/bin/prusa-slicer \
+          --set __GLX_VENDOR_LIBRARY_NAME mesa \
+          --set MESA_LOADER_DRIVER_OVERRIDE zink \
+          --set GALLIUM_DRIVER zink
+      '';
+    }))
+    graphviz
+
+    # Muggler text app
+    libreoffice
   ];
 
   fonts.fontconfig.enable = true;

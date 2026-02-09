@@ -196,7 +196,34 @@ vim.lsp.config['rust_analyzer'] = {
 --    },
 }
 
+-- Go LSP (gopls)
+vim.lsp.config['gopls'] = {
+    cmd = { 'gopls' },
+    filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+    root_markers = { 'go.work', 'go.mod', '.git' },
+    capabilities = caps,
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+                shadow = true,
+            },
+            staticcheck = true,
+            gofumpt = true,
+            hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+            },
+        },
+    },
+}
+
 vim.lsp.enable('clangd')
+vim.lsp.enable('gopls')
 vim.lsp.enable('luals')
 vim.lsp.enable('cssls')
 vim.lsp.enable('ts_ls')

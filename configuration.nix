@@ -9,9 +9,18 @@ in
       ./hardware-configuration.nix
     ];
 
+  #Allow propietary garbage as Tony says
   nixpkgs.config.allowUnfree = true;
-  boot.loader.systemd-boot.enable = true;
+
+  #Dual boot OPTIONS
+  # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    efiSupport = true;
+    useOSProber = true; # Detects other operating systems
+  };
 
   networking.hostName = "nixos-virgin";
   networking.wireless.enable = true;
@@ -42,6 +51,7 @@ in
   time.timeZone = "Europe/Amsterdam";
 
   programs.nix-ld.enable = true;
+
 
   # Steam
   programs.steam = {

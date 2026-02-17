@@ -84,6 +84,7 @@ in
   };
 
   virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
 
   # Brightness control
   programs.light.enable = true;
@@ -101,7 +102,7 @@ in
     groups.uinput = { };
     users.elias = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "input" "uinput" "docker" "video" "dialout" ];
+      extraGroups = [ "wheel" "input" "uinput" "docker" "video" "dialout" "vboxusers" ];
       packages = with pkgs; [
         tree
       ];
@@ -123,6 +124,11 @@ in
     ];
   };
 
+  environment.sessionVariables = {
+    DIGITAL_OCEAN_TOKEN = secrets.tokens.digital-ocean;
+    SSH_KEY_NAME = "digital-ocean-shh-key";
+  };
+
   environment.systemPackages = with pkgs; [
     vim
     man-pages
@@ -140,6 +146,7 @@ in
     bat #cool cat with sexy higlights
     brightnessctl
     pamixer
+    vagrant #Virtualization tool
 
     #For running windows apps
     bottles

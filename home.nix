@@ -431,7 +431,8 @@ in
       if [ -z "$SSH_AUTH_SOCK" ]; then
         export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
       fi
-    '';
+      export RUBYOPT="-W0"
+    ''; #RUBY warnings supressed. Beware if you suddenly want to be a ruby developer!
   };
 
   xdg.configFile = builtins.mapAttrs
@@ -546,6 +547,7 @@ in
     ## Utils
     unzip
     btop
+    rclone
 
 
     ## System appearance
@@ -558,6 +560,7 @@ in
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
     papirus-icon-theme
+    glow #Terminal markdown render
 
     # Java Development Kit
     jdk21

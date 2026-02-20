@@ -13,11 +13,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.nixos-virgin = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
       system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
+      # Shared modules used by all hosts
+      commonModules = [
+        ./modules/common.nix
+        ./modules/gaming.nix
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -29,6 +31,18 @@
         }
         inputs.stylix.nixosModules.stylix
       ];
+    in
+    {
+      nixosConfigurations = {
+        nixos-virgin = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = commonModules ++ [ ./hosts/laptop/configuration.nix ];
+        };
+
+        nixos-desktop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = commonModules ++ [ ./hosts/desktop/configuration.nix ];
+        };
+      };
     };
-  };
 }

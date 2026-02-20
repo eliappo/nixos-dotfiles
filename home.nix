@@ -423,7 +423,7 @@ in
     shellAliases = {
       btw = "echo I use nixos and I am a virgin now";
       nr = ''echo Rebuild and Switch that mother fucker! &&
-             sudo nixos-rebuild switch --impure --flake ~/nixos-dotfiles#nixos-virgin'';
+             sudo nixos-rebuild switch --impure --flake ~/nixos-dotfiles#$(hostname)'';
       run_pintos = "docker run -it --rm --name pintos --mount type=bind,source=/home/elias/itu/operating_systems_and_C/,target=/home/PKUOS/pintos pkuflyingpig/pintos bash";
       pintos_docker_attach = "docker exec -it pintos bash";
     };

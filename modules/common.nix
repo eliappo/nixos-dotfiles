@@ -4,13 +4,12 @@ let
   secrets = import /home/elias/secrets.nix; #Place your secrets outside of the flake-directory because git.
 in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
-
   #Allow propietary garbage as Tony says
   nixpkgs.config.allowUnfree = true;
+
+  time.timeZone = "Europe/Amsterdam";
+
+  programs.nix-ld.enable = true;
 
   #Dual boot OPTIONS
   # boot.loader.systemd-boot.enable = true;
@@ -22,9 +21,19 @@ in
     useOSProber = true; # Detects other operating systems
   };
 
-  networking.hostName = "nixos-virgin";
-  networking.wireless.enable = true;
 
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true; # Power on Bluetooth adapter on boot
+  };
+
+  # services.blueman.enable = true; # Blueman GUI for easy pairing
+  services.displayManager.ly.enable = true;
+  # Enable Hyprland
+  programs.hyprland.enable = true;
+
+  networking.wireless.enable = true;
   networking.wireless.networks = {
     "Nr. 4 5GHz" = {
       psk = secrets.wifiPasswords."Nr. 4 5GHz";
@@ -48,35 +57,6 @@ in
     "Pixel_8135".psk = secrets.wifiPasswords."Pixel_8135";
   };
 
-  time.timeZone = "Europe/Amsterdam";
-
-  programs.nix-ld.enable = true;
-
-
-  # Steam
-  programs.steam = {
-    enable = true;
-    # remotePlay.openFirewall = true; # Optional: for Steam Remote Play
-    # dedicatedServer.openFirewall = true; # Optional: for Source Dedicated Server
-  };
-
-  # If you need 32-bit graphics support (usually needed for games)
-  hardware.graphics.enable32Bit = true;
-
-  # Bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true; # Power on Bluetooth adapter on boot
-  };
-
-  # services.blueman.enable = true; # Blueman GUI for easy pairing
-  services.displayManager.ly.enable = true;
-  # Enable Hyprland
-  programs.hyprland.enable = true;
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
-  hardware.nvidia.powerManagement.enable = true;
   # XDG portal for screen sharing, file pickers, etc.
   xdg.portal = {
     enable = true;

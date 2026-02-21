@@ -9,6 +9,7 @@ let
     rofi = "rofi";
     kanata = "kanata";
     hypr = "hypr";
+    alacritty = "alacritty";
   };
   myscripts = import ./scripts.nix { inherit pkgs; };
   #Waybar related
@@ -189,6 +190,7 @@ in
 
 
   stylix.targets.rofi.enable = false;
+  stylix.targets.alacritty.enable = false;
 
   programs.waybar = {
     enable = true;
@@ -415,7 +417,7 @@ in
   };
 
   programs.alacritty = {
-    enable = true;
+    enable = false;
   };
 
   programs.bash = {

@@ -145,7 +145,7 @@ in
   #search "Ricing linux has never been easier | NixOS + stylix" on youtube.
   stylix = {
     enable = true;
-    image = /home/elias/Wallpapers/uwp4293631.png;
+    image = ../Wallpapers/uwp4293631.png;
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     polarity = "dark";
     fonts = {

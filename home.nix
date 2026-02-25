@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, hostName, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
@@ -9,7 +9,6 @@ let
     rofi = "rofi";
     kanata = "kanata";
     hypr = "hypr";
-    alacritty = "alacritty";
   };
   myscripts = import ./scripts.nix { inherit pkgs; };
   #Waybar related
@@ -40,6 +39,11 @@ let
   #b = hexToDec (builtins.substring 4 2 baseColor);
 in
 {
+
+  # Conditional monitor setup on behalf of the host.
+  home.file.".config/hypr/monitors.conf".source =
+    create_symlink "${dotfiles}/hypr/monitors-${hostName}.conf";
+
   home.sessionVariables = {
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
   };
@@ -190,7 +194,6 @@ in
 
 
   stylix.targets.rofi.enable = false;
-  stylix.targets.alacritty.enable = false;
 
   programs.waybar = {
     enable = true;
@@ -417,7 +420,7 @@ in
   };
 
   programs.alacritty = {
-    enable = false;
+    enable = true;
   };
 
   programs.bash = {
@@ -548,8 +551,11 @@ in
 
     ## Utils
     unzip
+    unrar
+    p7zip
     btop
     rclone
+
 
 
     ## System appearance

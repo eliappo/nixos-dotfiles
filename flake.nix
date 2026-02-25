@@ -17,7 +17,7 @@
     let
       system = "x86_64-linux";
       # Shared modules used by all hosts
-      commonModules = [
+      commonModules = hostName: [
         ./modules/common.nix
         ./modules/gaming.nix
         home-manager.nixosModules.home-manager
@@ -27,6 +27,9 @@
             useUserPackages = true;
             users.elias = import ./home.nix;
             backupFileExtension = "backup";
+            extraSpecialArgs = {
+              inherit hostName;
+            };
           };
         }
         inputs.stylix.nixosModules.stylix
@@ -36,12 +39,12 @@
       nixosConfigurations = {
         nixos-virgin = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = commonModules ++ [ ./hosts/laptop/configuration.nix ];
+          modules = commonModules "nixos-virgin" ++ [ ./hosts/laptop/configuration.nix ];
         };
 
         nixos-desktop = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = commonModules ++ [ ./hosts/desktop/configuration.nix ];
+          modules = commonModules "nixos-desktop" ++ [ ./hosts/desktop/configuration.nix ];
         };
       };
     };

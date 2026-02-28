@@ -427,6 +427,12 @@ in
 
   programs.alacritty = {
     enable = true;
+    settings = {
+      terminal.shell = {
+        program = "${pkgs.bash}/bin/bash";
+        args = [ "--login" ];
+      };
+    };
   };
 
   programs.bash = {

@@ -86,6 +86,7 @@ in
     extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = "false";
+      core.editor = "nvim";
     };
   };
 
@@ -438,6 +439,7 @@ in
       pintos_docker_attach = "docker exec -it pintos bash";
       itu-vpn = "sudo openconnect --protocol=fortinet sslvpn.itu.dk --user=elpo";
       itu-ssh = "ssh elpo@hpc.itu.dk";
+      cat = "bat";
     };
     initExtra = ''
       if [ -z "$SSH_AUTH_SOCK" ]; then

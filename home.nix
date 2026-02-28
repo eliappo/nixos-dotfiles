@@ -58,6 +58,11 @@ in
         user = "elpo";
         identityFile = "~/.ssh/id_ed25519";
       };
+      "digital-ocean" = {
+        hostname = "digitalocean.com";
+        user = "eliappo";
+        identityFile = "~/.ssh/digital-ocean-key";
+      };
     };
   };
   services.ssh-agent.enable = true;
@@ -426,6 +431,8 @@ in
              sudo nixos-rebuild switch --impure --flake ~/nixos-dotfiles#$(hostname)'';
       run_pintos = "docker run -it --rm --name pintos --mount type=bind,source=/home/elias/itu/operating_systems_and_C/,target=/home/PKUOS/pintos pkuflyingpig/pintos bash";
       pintos_docker_attach = "docker exec -it pintos bash";
+      itu-vpn = "sudo openconnect --protocol=fortinet sslvpn.itu.dk --user=elpo";
+      itu-ssh = "ssh elpo@hpc.itu.dk";
     };
     initExtra = ''
       if [ -z "$SSH_AUTH_SOCK" ]; then
@@ -536,6 +543,7 @@ in
       pip
       virtualenv
       werkzeug
+      dbus-python
     ]))
 
     ##Esp32 development
@@ -584,6 +592,7 @@ in
       '';
     }))
     graphviz
+    fritzing
 
     # Muggler text app
     libreoffice

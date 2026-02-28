@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  secrets = import /home/elias/secrets.nix;
+in
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -16,4 +19,9 @@
 
   # Gaming module OFF on laptop
   custom.gaming.enable = false;
+
+  systemd.tmpfiles.rules = [
+    "L /var/lib/iwd/eduroam.8021x - - - - /etc/iwd/eduroam.8021x"
+    "L /var/lib/iwd/ca.pem - - - - /etc/iwd/ca.pem"
+  ];
 }

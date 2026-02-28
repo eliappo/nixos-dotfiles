@@ -33,6 +33,7 @@ in
   # Enable Hyprland
   programs.hyprland.enable = true;
 
+
   networking.wireless.enable = true;
   networking.wireless.networks = {
     "Nr. 4 5GHz" = {
@@ -49,13 +50,17 @@ in
     eduroam = {
       auth = ''
         key_mgmt=WPA-EAP
-        eap=PWD
+        eap=PEAP
+        ca_cert="/etc/ssl/certs/eduroam-ca.pem"
         identity="${secrets.wifiPasswords.eduroam.identity}"
+        altsubject_match="DNS:network.itu.dk"
+        phase2="auth=MSCHAPV2"
         password="${secrets.wifiPasswords.eduroam.password}"
       '';
     };
     "Pixel_8135".psk = secrets.wifiPasswords."Pixel_8135";
   };
+  environment.etc."ssl/certs/eduroam-ca.pem".source = ./ca.pem;
 
   # XDG portal for screen sharing, file pickers, etc.
   xdg.portal = {
@@ -106,7 +111,7 @@ in
 
   environment.sessionVariables = {
     DIGITAL_OCEAN_TOKEN = secrets.tokens.digital-ocean;
-    SSH_KEY_NAME = "digital-ocean-shh-key";
+    SSH_KEY_NAME = "digital-ocean-key";
   };
 
   environment.systemPackages = with pkgs; [
@@ -127,6 +132,7 @@ in
     brightnessctl
     pamixer
     vagrant #Virtualization tool
+    openconnect #open source vpn tunnel
 
     #For running windows apps
     bottles

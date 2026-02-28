@@ -10,6 +10,3 @@
 
 # Secrets (if you add any)
 **/secrets.nix
-
-# lazyvim random files
-lazy-lock.json

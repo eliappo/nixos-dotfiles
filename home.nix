@@ -565,6 +565,10 @@ in
     esp-generate
     espup
 
+    ## Raspberry pi
+    rpi-imager
+
+
     ## Utils
     unzip
     unrar

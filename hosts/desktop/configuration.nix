@@ -11,6 +11,11 @@
     ];
   };
 
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    rtl8812au
+  ];
+  boot.kernelModules = [ "8812au" ];
+
   # Desktop-specific GPU config (adjust to your actual GPU)
   services.xserver.videoDrivers = [ "nvidia" ]; # or "amdgpu"
   hardware.nvidia.open = true; # uncomment if nvidia

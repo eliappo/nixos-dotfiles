@@ -100,6 +100,8 @@ in
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
 
+  services.zerotierone.enable = true;
+
   programs.firefox.enable = true;
   programs.thunar = {
     enable = true;
@@ -133,6 +135,9 @@ in
     pamixer
     vagrant #Virtualization tool
     openconnect #open source vpn tunnel
+
+    ## Networking
+    # zerotierone
 
     #For running windows apps
     bottles

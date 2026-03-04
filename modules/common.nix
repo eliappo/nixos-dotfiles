@@ -28,6 +28,8 @@ in
     powerOnBoot = true; # Power on Bluetooth adapter on boot
   };
 
+  services.tailscale.enable = true;
+
   # services.blueman.enable = true; # Blueman GUI for easy pairing
   services.displayManager.ly.enable = true;
   # Enable Hyprland

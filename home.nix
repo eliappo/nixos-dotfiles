@@ -597,6 +597,8 @@ in
     # Additional useful tools
     jq
 
+    localsend
+
     freecad
     (pkgs.prusa-slicer.overrideAttrs (old: {
       nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ pkgs.makeWrapper ];

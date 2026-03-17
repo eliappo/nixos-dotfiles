@@ -598,11 +598,8 @@ in
     # Additional useful tools
     jq
 
-<<<<<<< HEAD
     arduino-ide
-=======
     localsend
->>>>>>> 9a542b795e0365252251285a15576458247f55b4
 
     freecad
     (pkgs.prusa-slicer.overrideAttrs (old: {

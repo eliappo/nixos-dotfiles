@@ -539,6 +539,7 @@ in
 
     ## docker
     docker-compose
+    grafana
 
     ## Go-lang
     go_1_25
@@ -596,6 +597,8 @@ in
     gradle
     # Additional useful tools
     jq
+
+    arduino-ide
 
     freecad
     (pkgs.prusa-slicer.overrideAttrs (old: {

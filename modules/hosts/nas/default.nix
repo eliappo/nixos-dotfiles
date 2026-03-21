@@ -14,6 +14,10 @@
       ({ pkgs, ... }: {
         networking.hostName = "nixos-nas";
 
+        users.users.elias.openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrmlWbyrXyqEI8nP/N31d1yfT314rk3Jr7DS47f6Q27 desktop ssh"
+        ];
+
         # ── Git over SSH ─────────────────────────────────────────────────────
         # Bare repos live in /srv/git.
         # Create:  git init --bare /srv/git/myproject.git
@@ -39,7 +43,7 @@
         # (typically 10.147.0.0/16 — check your ZeroTier network settings).
         custom.fileshare = {
           enable = true;
-          domain = "files.yourdomain.com"; # TODO: replace with real domain
+          domain = "files.eliappo.dk";
         };
 
         # ── Extra system packages ─────────────────────────────────────────

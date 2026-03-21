@@ -14,9 +14,12 @@
       ({ pkgs, ... }: {
         networking.hostName = "nixos-nas";
 
-        users.users.elias.openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrmlWbyrXyqEI8nP/N31d1yfT314rk3Jr7DS47f6Q27 desktop ssh"
-        ];
+        users.users.elias = {
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrmlWbyrXyqEI8nP/N31d1yfT314rk3Jr7DS47f6Q27 desktop ssh"
+          ];
+          hashedPassword = "$6$bAzgu5Zw0lMpRMLU$n.OHge5ChT9fiJlKJ1ZHY9prbGfEOJJLFDbTzKFYTq91hBRqOjj0eiEwhsztzp6dr48l9NQjcrvQsV6m30E7//";
+        };
 
         # ── Git over SSH ─────────────────────────────────────────────────────
         # Bare repos live in /srv/git.

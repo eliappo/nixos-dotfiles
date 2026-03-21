@@ -1,6 +1,13 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    wl-clipboard # Changed from xclip for Wayland
+    brave #A browser that claimss to protect you
+    brightnessctl
+    pamixer
+  ];
+
   services.displayManager.ly.enable = true;
 
   # Enable Hyprland

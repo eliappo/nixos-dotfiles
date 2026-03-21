@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   secrets = import /home/elias/secrets.nix; #Place your secrets outside of the flake-directory because git.
@@ -31,6 +31,11 @@ in
     "Pixel_8135".psk = secrets.wifiPasswords."Pixel_8135";
   };
   environment.etc."ssl/certs/eduroam-ca.pem".source = ./ca.pem;
+
+  environment.systemPackages = with pkgs; [
+    openconnect #open source vpn tunnel
+    vagrant #Virtualization tool
+  ];
 
   services.tailscale.enable = true;
   services.zerotierone.enable = true;

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   #Allow propietary garbage as Tony says
@@ -6,6 +6,15 @@
   nixpkgs.overlays = [ inputs.claude-code.overlays.default ];
 
   time.timeZone = "Europe/Amsterdam";
+
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    man-pages
+    bat #cool cat with sexy higlights
+    coreutils #Some core ulilities?
+    claude-code
+  ];
 
   programs.nix-ld.enable = true;
 

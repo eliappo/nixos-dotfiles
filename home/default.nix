@@ -9,6 +9,7 @@
     ./terminal.nix
     ./development.nix
     ./desktop.nix
+    ./waybar.nix
     ./media.nix
     ./tools.nix
     ./theming.nix

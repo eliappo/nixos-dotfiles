@@ -29,8 +29,7 @@
     ##Programs
     nil
     nodejs #????
-    gcc #GNU C compiler NOTE: Both inside the configuration.nix and home.nix FIX:?
-    clang-tools
+    clang-tools # clang-format, clangd LSP (gcc/clang compiler is in nixos/dev-tools.nix)
     slurp #Get dragged screen dimension
     grim #Screenshot - can take dimension form slurp
 

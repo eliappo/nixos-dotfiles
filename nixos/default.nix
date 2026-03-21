@@ -14,8 +14,11 @@
     ./hardware.nix
     ./virtualization.nix
     ./desktop.nix
+    ./dev-tools.nix
+    ./wine.nix
     ./theming.nix
-    ./packages.nix
     ./gaming.nix
+    ./nvidia.nix
+    ./rtl8812au.nix
   ];
 }

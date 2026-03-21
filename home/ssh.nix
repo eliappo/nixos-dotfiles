@@ -19,6 +19,11 @@
         user = "eliappo";
         identityFile = "~/.ssh/digital-ocean-key";
       };
+      "nas" = {
+        hostname = "10.244.5.241";
+        user = "elias";
+        identityFile = "~/.ssh/id_ed25519";
+      };
     };
   };
 

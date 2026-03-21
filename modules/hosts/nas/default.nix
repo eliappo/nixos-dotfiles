@@ -60,7 +60,6 @@
         home-manager.users.elias.imports = [
           ../../../home/base.nix
           ../../../home/ssh.nix
-          ../../../home/development.nix
         ];
       })
     ];

@@ -15,44 +15,17 @@
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      # Shared modules used by all hosts
-      commonModules = hostName: [
-        ./modules/common.nix
-        ./modules/gaming.nix
-        {
-          nixpkgs.overlays = [ inputs.claude-code.overlays.default ];
-        }
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.elias = import ./home.nix;
-            backupFileExtension = "backup";
-            extraSpecialArgs = {
-              inherit hostName;
-            };
-          };
-        }
-        inputs.stylix.nixosModules.stylix
-      ];
-    in
-    {
-      nixosConfigurations = {
-        nixos-virgin = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = commonModules "nixos-virgin" ++ [ ./hosts/laptop/configuration.nix ];
-        };
-
-        nixos-desktop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = commonModules "nixos-desktop" ++ [ ./hosts/desktop/configuration.nix ];
-        };
-      };
-    };
+  # import-tree recursively discovers every .nix under ./modules/ and treats
+  # each as a flake-parts module. Adding a new host = adding a file there.
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+    systems = [ "x86_64-linux" ];
+    imports = [ (inputs.import-tree ./modules) ];
+  };
 }

@@ -7,6 +7,8 @@
     specialArgs = { inherit inputs; };
     modules = [
       ./_hardware-configuration.nix
+      ./_disk-config.nix
+      inputs.disko.nixosModules.disko
       ../../../nixos/server.nix
 
       ({ pkgs, ... }: {

@@ -1,12 +1,9 @@
-# PLACEHOLDER — replace with the real hardware configuration.
+# Hardware configuration for nixos-nas.
 #
-# After booting the NAS machine from a NixOS installer USB, run:
-#
-#   sudo nixos-generate-config --root /mnt
-#
-# Then copy /mnt/etc/nixos/hardware-configuration.nix here.
-# The file below is a generic Intel laptop baseline that compiles but
-# will need updating with the actual disk labels, kernel modules, etc.
+# fileSystems and swapDevices are intentionally absent — disko generates them
+# from disk-config.nix.  After install you may regenerate with:
+#   sudo nixos-generate-config --show-hardware-config
+# and add any missing kernel modules here.
 
 { modulesPath, ... }:
 
@@ -17,20 +14,6 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-
-  # TODO: replace with real disk labels from the installed system
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
-  };
-
-  swapDevices = [ ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
 }

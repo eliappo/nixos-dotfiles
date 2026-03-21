@@ -37,7 +37,6 @@ in
     vagrant #Virtualization tool
   ];
 
-  services.tailscale.enable = true;
   services.zerotierone.enable = true;
 
   environment.sessionVariables = {

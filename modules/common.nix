@@ -21,7 +21,7 @@ in
     useOSProber = true; # Detects other operating systems
   };
 
-
+  hardware.pulseaudio.enable = true;
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
@@ -79,7 +79,7 @@ in
   # Sound with PipeWire
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
+    enable = false;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -137,6 +137,7 @@ in
     pamixer
     vagrant #Virtualization tool
     openconnect #open source vpn tunnel
+    claude-code
 
     ## Networking
     # zerotierone
@@ -145,6 +146,7 @@ in
     bottles
     wine
     winetricks
+    xorg.libxkbfile
   ];
 
   fonts.packages = with pkgs; [
@@ -191,6 +193,7 @@ in
     };
     #Possibly cursor settings here also.
   };
+
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";

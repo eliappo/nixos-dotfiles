@@ -216,7 +216,7 @@ in
         ];
         modules-center = [ ];
         modules-right = [
-          "custom/sep"
+          "chardware.pulseaudio.enable = true;ustom/sep"
           "pulseaudio"
           "custom/sep"
           "bluetooth"
@@ -597,6 +597,7 @@ in
     gradle
     # Additional useful tools
     jq
+
 
     arduino-ide
     localsend

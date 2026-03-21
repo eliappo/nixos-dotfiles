@@ -11,6 +11,10 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -20,6 +24,9 @@
       commonModules = hostName: [
         ./modules/common.nix
         ./modules/gaming.nix
+        {
+          nixpkgs.overlays = [ inputs.claude-code.overlays.default ];
+        }
         home-manager.nixosModules.home-manager
         {
           home-manager = {

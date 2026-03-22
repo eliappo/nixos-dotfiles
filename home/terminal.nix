@@ -21,6 +21,8 @@
       pintos_docker_attach = "docker exec -it pintos bash";
       itu-vpn = "sudo openconnect --protocol=fortinet sslvpn.itu.dk --user=elpo";
       itu-ssh = "ssh elpo@hpc.itu.dk";
+      itu-djx = "ssh -J elpo@hpc.itu.dk elpo@dgx2.hpc.itu.dk";
+      ssh-rpi = "ssh elias@10.244.5.206";
       cat = "bat";
     };
     initExtra = ''

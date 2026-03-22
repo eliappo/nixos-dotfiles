@@ -1,0 +1,45 @@
+[colors.bright]
+black = "#85a3a9"
+blue = "#7a9699"
+cyan = "#619a9d"
+green = "#6b97a6"
+magenta = "#8c9298"
+red = "#8a938e"
+white = "#dcf5f8"
+yellow = "#9e8e82"
+
+[colors.cursor]
+cursor = "#cbe8e6"
+text = "#071e28"
+
+[colors.normal]
+black = "#071e28"
+blue = "#7a9699"
+cyan = "#619a9d"
+green = "#6b97a6"
+magenta = "#8c9298"
+red = "#8a938e"
+white = "#cbe8e6"
+yellow = "#9e8e82"
+
+[colors.primary]
+background = "#071e28"
+bright_foreground = "#dcf5f8"
+foreground = "#cbe8e6"
+
+[colors.selection]
+background = "#347380"
+text = "#cbe8e6"
+
+[font]
+size = 18
+[font.normal]
+family = "JetBrainsMono Nerd Font Mono"
+style = "Regular"
+
+[terminal.shell]
+args = ["--login"]
+program = "/nix/store/nn27l879np49xvx6l1a8nqnqlp9apd8n-bash-interactive-5.2p37/bin/bash"
+
+[window]
+opacity = 0.85

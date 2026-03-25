@@ -20,5 +20,6 @@
     ./gaming.nix
     ./nvidia.nix
     ./rtl8812au.nix
+    ./syncthing.nix
   ];
 }

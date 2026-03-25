@@ -20,7 +20,7 @@
         identityFile = "~/.ssh/digital-ocean-key";
       };
       "nas" = {
-        hostname = "10.244.5.241";
+        hostname = "10.244.5.241"; #Zerotier IP-address
         user = "elias";
         identityFile = "~/.ssh/id_ed25519";
       };

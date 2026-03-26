@@ -14,6 +14,10 @@
       ({ pkgs, ... }: {
         networking.hostName = "nixos-nas";
 
+        # Keep running with lid closed
+        services.logind.lidSwitch = "ignore";
+        services.logind.lidSwitchExternalPower = "ignore";
+
         networking.interfaces.wlp4s0.ipv4.addresses = [{
           address = "192.168.10.101";
           prefixLength = 24;

@@ -41,6 +41,6 @@ in
 
   environment.sessionVariables = {
     DIGITAL_OCEAN_TOKEN = secrets.tokens.digital-ocean;
-    SSH_KEY_NAME = "digital-ocean-key";
+    SSH_KEY_NAME = "X1 Laptop";
   };
 }

@@ -25,6 +25,7 @@
     ripgrep
     tree
     fd
+    pavucontrol
 
     ##Programs
     nil
@@ -37,6 +38,8 @@
     ##Rust
     rustup
 
+    ## DevOps
+    ansible
     ## docker
     docker-compose
     grafana
@@ -55,6 +58,7 @@
       pandas
       flask
       pip
+      requests
       virtualenv
       werkzeug
       dbus-python

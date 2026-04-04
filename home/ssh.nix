@@ -17,7 +17,7 @@
       "digital-ocean" = {
         hostname = "digitalocean.com";
         user = "eliappo";
-        identityFile = "~/.ssh/digital-ocean-key";
+        identityFile = "~/.ssh/id_ed25519";
       };
       "nas" = {
         hostname = "10.244.5.241";

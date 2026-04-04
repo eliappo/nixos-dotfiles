@@ -14,6 +14,17 @@
       ({ pkgs, ... }: {
         networking.hostName = "nixos-nas";
 
+        # Keep running with lid closed
+        services.logind.lidSwitch = "ignore";
+        services.logind.lidSwitchExternalPower = "ignore";
+
+        networking.interfaces.wlp4s0.ipv4.addresses = [{
+          address = "192.168.10.101";
+          prefixLength = 24;
+        }];
+        networking.defaultGateway = "192.168.10.1";
+        networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+
         users.users.elias = {
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrmlWbyrXyqEI8nP/N31d1yfT314rk3Jr7DS47f6Q27 desktop ssh"

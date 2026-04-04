@@ -20,6 +20,8 @@
         custom.gaming.enable = true;
         custom.gaming.tvOutput = "HDMI-A-1";
 
+        custom.syncthing.enable = true;
+
         # SSH authorized keys
         users.users.elias.openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrmlWbyrXyqEI8nP/N31d1yfT314rk3Jr7DS47f6Q27 desktop ssh"

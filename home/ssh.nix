@@ -20,7 +20,12 @@
         identityFile = "~/.ssh/id_ed25519";
       };
       "nas" = {
-        hostname = "10.244.5.241";
+        hostname = "10.244.5.241"; #Zerotier IP-address
+        user = "elias";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      "nas-local" = {
+        hostname = "192.168.10.101"; #Zerotier IP-address
         user = "elias";
         identityFile = "~/.ssh/id_ed25519";
       };

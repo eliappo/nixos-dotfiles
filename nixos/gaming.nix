@@ -3,6 +3,9 @@
 let
   cfg = config.custom.gaming;
 
+  # Hyprland-only: uses hyprctl to enable the TV output, place the nested
+  # `gamescope --backend sdl` window, then disable the output on exit. Launching
+  # this from a Niri session will fail (no hyprctl). Revisit if Niri becomes primary.
   game-console = pkgs.writeShellScriptBin "game-console" ''
 
     hyprctl keyword monitor "HDMI-A-1,1920x1080@60,2560,1"
@@ -67,6 +70,7 @@ in
       wlr-randr
       game-console
       steamos-session-select
+      melonDS
     ];
   };
 }

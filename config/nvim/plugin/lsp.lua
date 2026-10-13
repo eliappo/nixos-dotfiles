@@ -171,29 +171,14 @@ vim.lsp.config['clangd'] = {
 }
 
 -- Rust LSP (rust-analyzer)
+-- Use `rustup run stable` so we always get the stable rust-analyzer binary,
+-- bypassing any rust-toolchain.toml that points at a custom channel (e.g. esp)
+-- which doesn't ship rust-analyzer.
 vim.lsp.config['rust_analyzer'] = {
-    cmd = { 'rust-analyzer' },
+    cmd = { 'rustup', 'run', 'stable', 'rust-analyzer' },
     filetypes = { 'rust', 'rs' },
     root_markers = { 'Cargo.toml', 'rust-project.json', '.git' },
---    capabilities = caps,
---    settings = {
---        ['rust-analyzer'] = {
---            cargo = {
---                allFeatures = true,
---                loadOutDirsFromCheck = true,
---                buildScripts = {
---                    enable = true,
---                },
---            },
---            check = {
---                allFeatures = true,
---                command = 'clippy',
---            },
---            procMacro = {
---                enable = true,
---            },
---        },
---    },
+    capabilities = caps,
 }
 
 -- Go LSP (gopls)

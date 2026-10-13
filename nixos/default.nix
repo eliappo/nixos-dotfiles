@@ -21,5 +21,6 @@
     ./nvidia.nix
     ./rtl8812au.nix
     ./syncthing.nix
+    ./udev-rules.nix #For daisy seed programming
   ];
 }

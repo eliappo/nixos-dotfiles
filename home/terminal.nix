@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.alacritty = {
@@ -8,6 +8,8 @@
         program = "${pkgs.bash}/bin/bash";
         args = [ "--login" ];
       };
+      window.decorations = "None";
+      window.opacity = lib.mkForce 0.85;
     };
   };
 

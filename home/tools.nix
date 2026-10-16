@@ -22,9 +22,10 @@ in
 
     ## System appearance
     hyprpaper
+    swaybg
     hyprpicker
     nixpkgs-fmt
-    rofi
+    rofi-wayland
     kanata
     font-awesome
     nerd-fonts.jetbrains-mono

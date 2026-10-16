@@ -78,5 +78,6 @@
     jq
 
     arduino-ide
+    kicad
   ];
 }

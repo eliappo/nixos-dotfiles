@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('n', '<F4>', vim.lsp.buf.code_action)
 
         -- Put near your LSP on_attach
-        local excluded_filetypes = { php = true , c == true, cpp == true, h == true, hpp = true }
+        local excluded_filetypes = { php = true, c = true, cpp = true, h = true, hpp = true }
 
         -- Auto-format on save (only if server can't do WillSaveWaitUntil)
         if not client:supports_method('textDocument/willSaveWaitUntil')

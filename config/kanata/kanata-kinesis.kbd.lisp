@@ -28,10 +28,10 @@
 )
 
 (deflayer symbols
-  _     RA-8 S-8  S-9  RA-9 _      _    _    _    _    _    _    _    _
-  S-1   ,    RA-7 RA-0 S-,  S--    _    _    _    S--  '    _    _    
-  S-2   S-]  S-0  S-/  RA-4 S-3    _    _    _    _    `    _    \    _
-  RA-2  RA-] 102d RA-= /    S-102d S-7  RA-9 _    102d ;    _    _
+  _     RA-8 S-8  S-9  RA-9 _      _    _    _       _    _    _    _    _
+  S-1   ,    RA-7 RA-0 S-,  S--    _    _    _       S--  '    _    _    
+  S-2   S-]  S-0  S-/  RA-4 S-3    _    _    @btick  _    _    _    \    _
+  RA-2  RA-] 102d RA-= /    S-102d S-7  RA-9 _       102d ;    _    _
   _    _    _              spc              bspc ret  _
   \ _ _ RA-102d S-6
 )
@@ -52,4 +52,6 @@
   k (tap-hold 200 200 k rctl)  ;; K - Ctrl
   l (tap-hold 200 200 l ralt)  ;; L - Alt
   ; (tap-hold 200 200 ; rmet)  ;; ; - GUI/Win/Super
+  btick (macro S-=)
 )
+

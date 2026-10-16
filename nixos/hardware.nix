@@ -1,8 +1,11 @@
-{ ... }:
+{ config, lib, ... }:
 
+let
+  # Audio backend is per-host: the desktop drives an Arturia MiniFuse 4 over
+  # PipeWire (+ JACK, low-latency profile); the laptop stays on PulseAudio.
+  isDesktop = config.networking.hostName == "nixos-desktop";
+in
 {
-  services.pulseaudio.enable = false;
-
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
@@ -14,9 +17,13 @@
   # Brightness control
   programs.light.enable = true;
 
-  # Sound with PipeWire
   security.rtkit.enable = true;
-  services.pipewire = {
+
+  # Laptop: PulseAudio.
+  services.pulseaudio.enable = !isDesktop;
+
+  # Desktop: PipeWire with MiniFuse 4 low-latency profile.
+  services.pipewire = lib.mkIf isDesktop {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;

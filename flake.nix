@@ -15,6 +15,10 @@
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
+    niri = {
+      url = "github:niri-wm/niri";
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";

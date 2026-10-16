@@ -3,7 +3,14 @@
 {
   #Allow propietary garbage as Tony says
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ inputs.claude-code.overlays.default ];
+  nixpkgs.overlays = [
+    inputs.claude-code.overlays.default
+    (final: prev: {
+      niri = inputs.niri.packages.${prev.system}.niri;
+    })
+  ];
+
+  nix.settings.trusted-users = [ "root" "elias" ];
 
   time.timeZone = "Europe/Amsterdam";
 
@@ -22,6 +29,7 @@
 
   # Man database
   documentation.man.generateCaches = true;
+  services.udisks2.enable = true;
 
   system.stateVersion = "25.05";
 }

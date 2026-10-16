@@ -19,6 +19,10 @@
         # Gaming module off — gamescope/TV console not needed on laptop
         custom.gaming.enable = false;
 
+        # Niri left off — laptop stays Hyprland-only for now.
+
+        custom.syncthing.enable = true;
+
         # Casual Steam without the full gaming setup
         programs.steam.enable = true;
         hardware.graphics.enable32Bit = true;

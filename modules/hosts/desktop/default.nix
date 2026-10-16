@@ -17,6 +17,9 @@
         custom.nvidia.enable = true;
         custom.rtl8812au.enable = true;
 
+        # Niri compositor (laptop stays Hyprland-only)
+        custom.niri.enable = true;
+
         # Gaming: full gamescope/TV console setup
         custom.gaming.enable = true;
         custom.gaming.tvOutput = "HDMI-A-1";

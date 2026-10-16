@@ -60,7 +60,6 @@
       pandas
       flask
       pip
-      requests
       virtualenv
       werkzeug
       dbus-python

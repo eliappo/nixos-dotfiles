@@ -23,6 +23,7 @@ in
       rofi = "rofi";
       kanata = "kanata";
       hypr = "hypr";
+      niri = "niri";
     };
 
   systemd.user.services.kanata-builtin = {

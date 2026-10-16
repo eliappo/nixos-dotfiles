@@ -14,10 +14,15 @@
         user = "elpo";
         identityFile = "~/.ssh/id_ed25519";
       };
+      "hack.itu.dk" = {
+        hostname = "hack.itu.dk";
+        user = "elpo";
+        identityFile = "~/.ssh/hack_key";
+      };
       "digital-ocean" = {
         hostname = "digitalocean.com";
         user = "eliappo";
-        identityFile = "~/.ssh/digital-ocean-key";
+        identityFile = "~/.ssh/id_ed25519";
       };
       "nas" = {
         hostname = "10.244.5.241"; #Zerotier IP-address

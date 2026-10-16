@@ -25,6 +25,7 @@
     ripgrep
     tree
     fd
+    pavucontrol
 
     ##Programs
     nil
@@ -36,6 +37,10 @@
     #### Development ####
     ##Rust
     rustup
+
+    ## DevOps
+    ansible
+    terraform
 
     ## docker
     docker-compose
@@ -78,6 +83,16 @@
     jq
 
     arduino-ide
-    kicad
+    # Wrap kicad to unset __GLX_VENDOR_LIBRARY_NAME — avoids a GLX segfault on
+    # the NVIDIA machines.
+    (pkgs.symlinkJoin {
+      name = "kicad";
+      paths = [ pkgs.kicad ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/kicad \
+          --unset __GLX_VENDOR_LIBRARY_NAME
+      '';
+    })
   ];
 }

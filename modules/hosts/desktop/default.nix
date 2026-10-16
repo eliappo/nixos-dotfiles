@@ -8,6 +8,7 @@
     modules = [
       ./_hardware-configuration.nix
       ../../../nixos/default.nix
+      ../../../nixos/ssh-server.nix
 
       {
         networking.hostName = "nixos-desktop";

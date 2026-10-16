@@ -22,22 +22,29 @@ in
   # Laptop: PulseAudio.
   services.pulseaudio.enable = !isDesktop;
 
-  # Desktop: PipeWire with MiniFuse 4 low-latency profile.
-  services.pipewire = lib.mkIf isDesktop {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
+  # Audio backend is explicit per-host. pipewire.enable must be set both ways:
+  # the graphical-desktop module (pulled in by Hyprland/Niri) defaults it to
+  # true, so the laptop needs an explicit `false` to stay on PulseAudio and
+  # avoid a pipewire+pulseaudio conflict.
+  services.pipewire =
+    if isDesktop then {
+      # Desktop: PipeWire with MiniFuse 4 low-latency profile.
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
 
-    # Low-latency config for Arturia MiniFuse 4
-    extraConfig.pipewire."92-minifuse-low-latency" = {
-      context.properties = {
-        default.clock.rate = 48000;
-        default.clock.quantum = 64;
-        default.clock.min-quantum = 64;
-        default.clock.max-quantum = 512;
+      # Low-latency config for Arturia MiniFuse 4
+      extraConfig.pipewire."92-minifuse-low-latency" = {
+        context.properties = {
+          default.clock.rate = 48000;
+          default.clock.quantum = 64;
+          default.clock.min-quantum = 64;
+          default.clock.max-quantum = 512;
+        };
       };
+    } else {
+      enable = false;
     };
-  };
 }

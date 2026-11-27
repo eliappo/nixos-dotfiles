@@ -27,8 +27,8 @@
       ssh-rpi = "ssh elias@10.244.5.206";
       cat = "bat";
     };
+    ## export PS1='\w ------> '
     initExtra = ''
-      export PS1='\w ------> '
       if [ -z "$SSH_AUTH_SOCK" ]; then
         export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
       fi
@@ -118,9 +118,10 @@
       # "base0B": "#6b97a6",
       # "base0C": "#619a9d",
       # "base0D": "#7a9699",
-      # "base0E": "#8c9298",
+      # "base0E": "#daa520",
       # "base0F": "#7f94a1",
     '';
+    # "base0E": "#8c9298",
   };
 
   programs.zoxide = {

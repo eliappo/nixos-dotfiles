@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map('n', 'gr', vim.lsp.buf.references)
         map('n', 'gs', vim.lsp.buf.signature_help)
         map('n', 'gl', vim.diagnostic.open_float)
-        map('n', '<F2>', vim.lsp.buf.rename)
+        map('n', 'rn', vim.lsp.buf.rename)
         map({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({ async = true }) end)
         map('n', '<F4>', vim.lsp.buf.code_action)
 
@@ -207,6 +207,15 @@ vim.lsp.config['gopls'] = {
     },
 }
 
+vim.lsp.config["tinymist"] = {
+    cmd = { "tinymist" },
+    filetypes = { "typst" },
+    init_options = { preview = { background = { enabled = true } } },
+    settings = {
+    }
+}
+
+vim.lsp.enable("tinymist")
 vim.lsp.enable('clangd')
 vim.lsp.enable('gopls')
 vim.lsp.enable('luals')

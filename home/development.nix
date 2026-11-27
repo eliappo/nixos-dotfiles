@@ -33,6 +33,7 @@
     clang-tools # clang-format, clangd LSP (gcc/clang compiler is in nixos/dev-tools.nix)
     slurp #Get dragged screen dimension
     grim #Screenshot - can take dimension form slurp
+    zenity
 
     #### Development ####
     ##Rust
@@ -82,6 +83,10 @@
     # Additional useful tools
     jq
 
+    # typst
+    tinymist
+    #zotero
+    zotero
     arduino-ide
     # Wrap kicad to unset __GLX_VENDOR_LIBRARY_NAME — avoids a GLX segfault on
     # the NVIDIA machines.

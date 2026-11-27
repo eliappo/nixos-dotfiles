@@ -7,6 +7,16 @@
     runtimeInputs = with pkgs; [ coreutils ];
     text = ''grim -l 0 -g "$(slurp)" - | wl-copy'';
   };
+
+  screen-shot-save-as = pkgs.writeShellApplication {
+    name = "screen-shot-save-as";
+    runtimeInputs = with pkgs; [ coreutils ];
+    text = ''
+      filename=$(zenity --entry --text="Enter filename to save to:" --entry-text="filename")
+      mkdir -p "$HOME/screenshots"
+      grim -l 0 -g "$(slurp)" "$HOME/screenshots/$filename.png"
+    '';
+  };
   pintos-symlink = pkgs.writeShellApplication {
     name = "pintos-symlink";
     runtimeInputs = with pkgs; [ coreutils ];

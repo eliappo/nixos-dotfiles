@@ -7,6 +7,7 @@ in
   home.packages = with pkgs; [
     myscripts.pintos-symlink #Pintos related scripts for OSandC course.
     myscripts.screen-shot-drag #Dragged screen shot to clipboard.
+    myscripts.screen-shot-save-as
 
     obsidian #Note Tool
     pastel

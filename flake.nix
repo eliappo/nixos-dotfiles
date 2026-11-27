@@ -15,9 +15,17 @@
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     };
+    raddbg = {
+      url = "github:NixOs/nixpkgs/2ce1eca88f17297f18679f1de78a2fcc08e6d2bb";
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    };
     niri = {
       url = "github:niri-wm/niri";
       inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    };
+    zotero = {
+      url = "github:retorquere/zotero-pkg";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

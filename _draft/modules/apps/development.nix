@@ -54,7 +54,7 @@
       neovim
       ripgrep
       fd
-      nil          # Nix LSP
+      nil # Nix LSP
 
       # Rust
       rustup
